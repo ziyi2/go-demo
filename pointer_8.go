@@ -83,7 +83,40 @@ func main() {
 	for i = 0; i < MAX; i++ {
 		fmt.Printf("a[%d] = %d\n", i, *ptr1[i])
 	}
+
+
+	/**
+	指向指针的指针
+	如果一个指针变量存放的又是另一个指针变量的地址，则称这个指针变量为指向指针的指针变量。
+	当定义一个指向指针的指针变量时，第一个指针存放第二个指针的地址，第二个指针存放变量的地址：
+	 */
+
+	var variable = 10;
+	var ptr2 *int;
+	var pptr2 **int;
+
+	ptr2 = &variable;
+	pptr2 = &ptr2;
+
+	fmt.Printf("指针变量 *ptr = %d\n", *ptr2)				//10
+	fmt.Printf("指向指针的指针变量 **pptr = %d\n", **pptr2)	//10
+
+	/**
+	Go语言指针作为函数参数
+	 */
+	var p1,p2 = 10,20;
+
+	swap(&p1,&p2);
+
+	fmt.Printf("交换后p1的值 : %d\n", p1)	//20
+	fmt.Printf("交换后p2的值 : %d\n", p2)	//10
 }
 
 
 
+func swap(x *int, y *int) {
+	var temp int;
+	temp = *x
+	*x = *y
+	*y = temp
+}
